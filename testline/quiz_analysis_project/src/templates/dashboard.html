@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Your Quiz Performance Dashboard</h1>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>Topic-Wise Performance</h2>
+            <img src="{{ url_for('static', filename='images/accuracy_by_topic.png') }}" alt="Topic-Wise Performance">
+        </div>
+        
+        <div class="card">
+            <h2>Score Trend Over Time</h2>
+            <img src="{{ url_for('static', filename='images/score_trend.png') }}" alt="Score Trend">
+        </div>
+        
+        <h3>Top Weak Areas</h3>
+        <table>
+            <tr>
+                <th>Topic</th>
+                <th>Accuracy</th>
+                <th>Recommended Focus</th>
+            </tr>
+            {% for topic, details in weak_areas.items() %}
+            <tr>
+                <td>{{ topic }}</td>
+                <td>{{ details.accuracy }}%</td>
+                <td>{{ details.recommendation }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

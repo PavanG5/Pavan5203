@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Performance Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Student Performance Dashboard</h1>
+    </header>
+    
+    <div class="container">
+        <h2>Performance Insights</h2>
+        
+        <div class="card">
+            <h3>Topic-Wise Performance</h3>
+            <img src="{{ url_for('static', filename='images/accuracy_by_topic.png') }}" alt="Topic Performance Chart">
+        </div>
+
+        <div class="card">
+            <h3>Score Trend</h3>
+            <img src="{{ url_for('static', filename='images/score_trend.png') }}" alt="Score Trend Chart">
+        </div>
+
+        <h3>Actionable Insights</h3>
+        <ul>
+            {% for insight in insights %}
+                <li>{{ insight }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3>Student Persona</h3>
+        <p><strong>Strengths:</strong> 
+            {% if student_persona.strengths %}
+                Focus on areas where you perform well, like {{ student_persona.strengths | join(', ') }}.
+            {% else %}
+                No significant strengths identified. Consider strengthening all areas.
+            {% endif %}
+        </p>
+        <p><strong>Weaknesses:</strong> 
+            {% if student_persona.weaknesses %}
+                Spend more time improving on topics like {{ student_persona.weaknesses | join(', ') }}.
+            {% else %}
+                No major weaknesses identified. Keep up the good work!
+            {% endif %}
+        </p>
+
+        <h3>Personalized Insights</h3>
+        <p>Based on your performance, here are some personalized recommendations:</p>
+        
+        <ul>
+            {% if student_persona.strengths %}
+                <li>Maintain your strong performance in {{ student_persona.strengths | join(', ') }} by practicing advanced problems to continue excelling in these areas.</li>
+            {% endif %}
+            
+            {% if student_persona.weaknesses %}
+                <li>Focus on improving topics like {{ student_persona.weaknesses | join(', ') }}. Consider revisiting fundamental concepts and practicing more basic exercises.</li>
+                <li>Try allocating more study time to weak areas by setting specific goals, such as reviewing 5 questions from each weak topic every day.</li>
+            {% else %}
+                <li>You're doing great across the board! Keep up the excellent work, and try to maintain a balanced approach to all topics.</li>
+            {% endif %}
+            
+            <li>As a "Strategic Learner," continue leveraging your strengths, but aim to balance your study schedule by addressing areas of weakness. Try using spaced repetition and active recall techniques for better retention.</li>
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
