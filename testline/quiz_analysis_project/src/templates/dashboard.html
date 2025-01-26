@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Your Quiz Performance Dashboard</h1>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>Topic-Wise Performance</h2>
+            <canvas id="topicPerformanceChart" class="bar-chart"></canvas>
+        </div>
+        
+        <h3>Top Weak Areas</h3>
+        <table>
+            <tr>
+                <th>Topic</th>
+                <th>Accuracy</th>
+                <th>Recommended Focus</th>
+            </tr>
+            <tr>
+                <td>Organic Chemistry</td>
+                <td>45%</td>
+                <td>Review foundational concepts.</td>
+            </tr>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
